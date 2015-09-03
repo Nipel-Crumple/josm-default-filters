@@ -16,14 +16,13 @@ limitations under the License.
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
+import java.awt.Color;
 
 public class HSBAdjustFilter extends PointFilter {
-	
+
 	public float hFactor, sFactor, bFactor;
 	private float[] hsb = new float[3];
-	
+
 	public HSBAdjustFilter() {
 		this(0, 0, 0);
 	}
@@ -38,27 +37,28 @@ public class HSBAdjustFilter extends PointFilter {
 	public void setHFactor( float hFactor ) {
 		this.hFactor = hFactor;
 	}
-	
+
 	public float getHFactor() {
 		return hFactor;
 	}
-	
+
 	public void setSFactor( float sFactor ) {
 		this.sFactor = sFactor;
 	}
-	
+
 	public float getSFactor() {
 		return sFactor;
 	}
-	
+
 	public void setBFactor( float bFactor ) {
 		this.bFactor = bFactor;
 	}
-	
+
 	public float getBFactor() {
 		return bFactor;
 	}
-	
+
+	@Override
 	public int filterRGB(int x, int y, int rgb) {
 		int a = rgb & 0xff000000;
 		int r = (rgb >> 16) & 0xff;
@@ -82,6 +82,7 @@ public class HSBAdjustFilter extends PointFilter {
 		return a | (rgb & 0xffffff);
 	}
 
+	@Override
 	public String toString() {
 		return "Colors/Adjust HSB...";
 	}

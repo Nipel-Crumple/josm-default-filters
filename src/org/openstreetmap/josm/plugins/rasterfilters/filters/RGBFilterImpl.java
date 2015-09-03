@@ -8,19 +8,19 @@ import javax.json.JsonObject;
 
 import org.openstreetmap.josm.Main;
 
-import com.jhlabs.image.ChannelMixFilter;
+import com.jhlabs.image.RGBAdjustFilter;
 
-public class ChannelMixFilterImpl implements Filter {
+public class RGBFilterImpl implements Filter {
 
-	private ChannelMixFilter mix = new ChannelMixFilter();
-	private int red, green, blue;
+	private RGBAdjustFilter mix = new RGBAdjustFilter();
+	private float red, green, blue;
 	private UID id;
 
 	@Override
 	public BufferedImage applyFilter(BufferedImage img) {
-		mix.setIntoR(red);
-		mix.setIntoG(green);
-		mix.setIntoB(blue);
+		mix.setRFactor(red);
+		mix.setGFactor(green);
+		mix.setBFactor(blue);
 		return mix.filter(img, null);
 	}
 
@@ -49,13 +49,13 @@ public class ChannelMixFilterImpl implements Filter {
 
 			// new value of rgb params
 			JsonObject redJson = filterState.getJsonObject("red");
-			setRed(redJson.getJsonNumber("value").intValue());
+			setRed((float) redJson.getJsonNumber("value").doubleValue());
 
 			JsonObject greenJson = filterState.getJsonObject("green");
-			setGreen(greenJson.getJsonNumber("value").intValue());
+			setGreen((float) greenJson.getJsonNumber("value").doubleValue());
 
 			JsonObject blueJson = filterState.getJsonObject("blue");
-			setBlue(blueJson.getJsonNumber("value").intValue());
+			setBlue((float) blueJson.getJsonNumber("value").doubleValue());
 
 			Main.debug(id.toString() + " \n" + toString());
 
@@ -75,15 +75,15 @@ public class ChannelMixFilterImpl implements Filter {
 		return id;
 	}
 
-	public void setBlue(int blue) {
+	public void setBlue(float blue) {
 		this.blue = blue;
 	}
 
-	public void setGreen(int green) {
+	public void setGreen(float green) {
 		this.green = green;
 	}
 
-	public void setRed(int red) {
+	public void setRed(float red) {
 		this.red = red;
 	}
 

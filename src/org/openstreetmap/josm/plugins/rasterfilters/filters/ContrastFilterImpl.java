@@ -14,7 +14,7 @@ public class ContrastFilterImpl implements Filter {
 	private UID id;
 
 	@Override
-	public JsonObject changeFilterState(JsonObject filterState) {
+	public JsonObject changeFilterState(JsonObject filterState){
 
 		JsonObject contrastJson = filterState.getJsonObject("contrast");
 		setContrast((float) contrastJson.getJsonNumber("value").doubleValue());
