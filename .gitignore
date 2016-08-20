@@ -1,5 +1,4 @@
-/bin
-/dist
-.idea/*
-.settings
 *.iml
+/target
+.idea/
+.settings/
